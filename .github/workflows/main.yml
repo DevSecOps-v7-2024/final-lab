@@ -68,3 +68,12 @@ jobs:
       username: ${{ secrets.DOCKER_USER }}
       password: ${{ secrets.DOCKER_PASSWORD }}
 
+  #Imagen de docker por comandos
+  - name: Build Docker
+    run: |
+      docker build --tag mrcuraqueo/final-lab:latest .
+  
+  #Docker punshipunshi
+  - name: Push Docker
+    run: |
+      docker push mrcuraqueo/final-lab:latest

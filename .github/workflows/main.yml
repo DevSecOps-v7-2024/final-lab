@@ -40,5 +40,5 @@ jobs:
     
     #Tokens de Seguridad
     env:
-      GITHUB_TOKEN: ${{ secrets.SONAR_TOKET }}
-      SONAR_TOKEN: ${{ secrets.Token_labfinal }}
+      GITHUB_TOKEN: ${{ secrets.TOKENSEGURIDAD }}
+      SONAR_TOKEN: ${{ secrets.TOKENSEGURIDAD }}

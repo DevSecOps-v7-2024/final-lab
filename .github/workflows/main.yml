@@ -52,7 +52,7 @@ jobs:
     uses: dependency-check/Dependency-Check_Action@1.1.0
     with:    
       project: 'final-lab'
-      path: .
+      path: '.'
       format: 'HTML' 
      
   - name: Upload Test results

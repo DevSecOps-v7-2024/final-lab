@@ -71,9 +71,14 @@ jobs:
   #Imagen de docker por comandos
   - name: Build Docker
     run: |
-      docker build --tag mrcuraqueo/final-lab:latest
-  
+      docker build --tag mrcuraqueo/final-lab:latest .
+      working-directory: ${{ github.workspace }}
+    
   #Docker punshipunshi
   - name: Push Docker
     run: |
       docker push mrcuraqueo/final-lab:latest
+  
+  
+  #Despliegue con Minikube
+  #Despliegue analisis de DAST

@@ -71,7 +71,7 @@ jobs:
   #Imagen de docker por comandos
   - name: Build Docker
     run: |
-      docker build --tag mrcuraqueo/final-lab:latest .
+      docker build --tag mrcuraqueo/final-lab:latest
   
   #Docker punshipunshi
   - name: Push Docker

@@ -37,23 +37,25 @@ jobs:
  
   - name: Run SonarCloud analysis
     uses: sonarsource/sonarcloud-github-action@master
-
-  #Dependenci Check
-  - name: Dependency Check
-    uses: dependency-check/Dependency-Check_Action@1.1.0
-    with:    
-     project: 'final-lab'
-     path: .
-     format: 'html' 
-     
-  - name: Upload Test results
-    uses: actions/upload-artifact@master
-    with:
-     name: Depcheck report
-     path: ${{github.workspace}}/reports
-          
     
     #Tokens de Seguridad
     env:
       GITHUB_TOKEN: ${{ secrets.TOKENSEGURIDAD }}
       SONAR_TOKEN: ${{ secrets.TOKENSEGURIDAD }}
+
+#Integracion SCA
+ DependencyCheck:
+  runs-on: ubuntu-latest
+  steps:
+  - name: Dependency Check
+    uses: dependency-check/Dependency-Check_Action@1.1.0
+    with:    
+      project: 'final-lab'
+      path: .
+      format: 'HTML' 
+     
+  - name: Upload Test results
+    uses: actions/upload-artifact@master
+    with:
+      name: Depcheck report
+      path: ${{github.workspace}}/reports

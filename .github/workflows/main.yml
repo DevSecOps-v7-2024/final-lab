@@ -15,14 +15,30 @@ jobs:
   runs-on: ubuntu-latest  
   steps:  
    - uses: actions/checkout@v3   
-   - name: Run a multi-line script
+   - name: Inicio
      run: |
-       echo "Hola mundo!"
+       echo "Jelou Jelou"
 
- test:
+#Conexion con SonarCloud 
+ SonarCloud:
   runs-on: ubuntu-latest
-  needs: build
+  needs: build  
   steps:
-   - name: test
-     run: |
-      echo "Hello word!"
+  - name: Checkout repository
+    uses: actions/checkout@v3
+ 
+  - name: Setup Node.js
+    uses: actions/checkout@v3
+    with:
+      node-version: '14'
+ 
+  - name: Install dependencies
+    run: npm install
+ 
+  - name: Run SonarCloud analysis
+    uses: sonarsource/sonarcloud-github-action@master
+    
+    #Tokens de Seguridad
+    env:
+      GITHUB_TOKEN: ${{ secrets.SONAR_TOKET }}
+      SONAR_TOKEN: ${{ secrets.Token_labfinal }}

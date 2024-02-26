@@ -109,5 +109,13 @@ jobs:
   #- name: Despliegue de la Aplicación
   #  run: |
   #    docker run -p 8085:8085 --name final-lab-deploy -d mrcuraqueo/final-lab:latest
+
+   #- name: Sleep
+   #  run: |
+   #   sleep 30
   
+   #- name: ZAP Scan
+   #  uses: zaproxy/action-baseline@v0.11.0
+   #  with:
+   #    target: 'http://localhost:8085'
   

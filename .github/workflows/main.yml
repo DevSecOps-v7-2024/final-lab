@@ -96,18 +96,18 @@ jobs:
    - name: Push image to DockerHub
      run: docker push mrcuraqueo/final-lab:latest
   
- #Deploy
- Deploy:
-  needs: SecurityTrivy_Docker
-  runs-on: self-hosted
+ #El deploy se comentó porque quedaba infinitamente corriendo una vez docker destop era detenido.
+ #Deploy:
+  #needs: SecurityTrivy_Docker
+  #runs-on: self-hosted
 
-  steps:
-  - name: Pull de la imagen Docker
-    run: |
-     docker pull mrcuraqueo/final-lab:latest
+  #steps:
+  #- name: Pull de la imagen Docker
+  #  run: |
+  #   docker pull mrcuraqueo/final-lab:latest
  
-  - name: Despliegue de la Aplicación
-    run: |
-      docker run -p 8085:8085 --name final-lab-deploy mrcuraqueo/final-lab:latest
+  #- name: Despliegue de la Aplicación
+  #  run: |
+  #    docker run -p 8085:8085 --name final-lab-deploy mrcuraqueo/final-lab:latest
   
   

@@ -62,7 +62,7 @@ jobs:
       path: ${{github.workspace}}/reports
    
 #Integración con DOCKER
- Docker:   
+ SecurityTrivy_Docker:   
   runs-on: ubuntu-latest
   needs: [SAST_SonarCloud, SCA_DependencyCheck]
   
@@ -70,10 +70,23 @@ jobs:
    - name: Checkout code
      uses: actions/checkout@v3
      
+ #Build
    - name: Build Docker image
      run: |
        docker build -t mrcuraqueo/final-lab:latest .
-     
+       
+ #Analisis de imagen
+   - name: Run Trivy vulnerability scanner
+     uses: aquasecurity/trivy-action@master
+     with:
+       image-ref: 'mrcuraqueo/final-lab:latest'
+       format: 'table'
+       exit-code: '1'
+       ignore-unfixed: true
+       vuln-type: 'os,library'
+       severity: 'CRITICAL,HIGH,MEDIUM,LOW'
+
+ #Login&Push  
    - name: Docker Login
      uses: docker/login-action@v3.0.0
      with:
@@ -84,5 +97,5 @@ jobs:
      run: docker push mrcuraqueo/final-lab:latest
   
   
-  #Despliegue con Minikube
+  
   #Despliegue analisis de DAST

@@ -72,7 +72,7 @@ jobs:
      
    - name: Build Docker image
      run: |
-       docker build -t setocl/final-lab:latest .
+       docker build -t mrcuraqueo/final-lab:latest .
      
    - name: Docker Login
      uses: docker/login-action@v3.0.0
@@ -81,7 +81,7 @@ jobs:
       password: ${{ secrets.DOCKER_PASSWORD }}
      
    - name: Push image to DockerHub
-     run: docker push setocl/final-lab:latest
+     run: docker push mrcuraqueo/final-lab:latest
   
   
   #Despliegue con Minikube

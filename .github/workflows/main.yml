@@ -20,7 +20,7 @@ jobs:
        echo "Jelou Jelou"
 
 #Conexion con SonarCloud 
- SonarCloud:
+ SAST_SonarCloud:
   runs-on: ubuntu-latest
   needs: build  
   steps:
@@ -44,7 +44,7 @@ jobs:
       SONAR_TOKEN: ${{ secrets.TOKENSEGURIDAD }}
 
 #Integracion SCA
- DependencyCheck:
+ SCA_DependencyCheck:
   runs-on: ubuntu-latest
   needs: build
   steps:
@@ -61,23 +61,27 @@ jobs:
       name: Depcheck report
       path: ${{github.workspace}}/reports
    
-  #Login de Docker
-  - name: Docker Login
-    uses: docker/login-action@v3.0.0
-    with:
+#Integración con DOCKER
+ Docker:   
+  runs-on: ubuntu-latest
+  needs: [SAST_SonarCloud, SCA_DependencyCheck]
+  
+  steps: 
+   - name: Checkout code
+     uses: actions/checkout@v3
+     
+   - name: Build Docker image
+     run: |
+       docker build -t setocl/final-lab:latest .
+     
+   - name: Docker Login
+     uses: docker/login-action@v3.0.0
+     with:
       username: ${{ secrets.DOCKER_USER }}
       password: ${{ secrets.DOCKER_PASSWORD }}
-
-  #Imagen de docker por comandos
-  - name: Build Docker
-    run: |
-      docker build --tag mrcuraqueo/final-lab:latest .
-    working-directory: ${{ github.workspace }}
-    
-  #Docker punshipunshi
-  - name: Push Docker
-    run: |
-      docker push mrcuraqueo/final-lab:latest
+     
+   - name: Push image to DockerHub
+     run: docker push setocl/final-lab:latest
   
   
   #Despliegue con Minikube

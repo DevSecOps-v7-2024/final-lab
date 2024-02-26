@@ -108,6 +108,6 @@ jobs:
  
   #- name: Despliegue de la Aplicación
   #  run: |
-  #    docker run -p 8085:8085 --name final-lab-deploy mrcuraqueo/final-lab:latest
+  #    docker run -p 8085:8085 --name final-lab-deploy -d mrcuraqueo/final-lab:latest
   
   
